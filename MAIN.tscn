@@ -1,0 +1,506 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://MAIN.gd" type="Script" id=1]
+[ext_resource path="res://RPC_Server.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Hack-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://droid-sans.bold.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="ButtonGroup" id=3]
+
+[node name="MAIN" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Server parameters" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Server log" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/Server log"]
+margin_left = 8.24066
+margin_top = 3.74577
+margin_right = 345.241
+margin_bottom = 28.7458
+text = "ALL"
+items = [ "ALL", null, false, 0, null, "ENGINE", null, false, 1, null, "ERRORS", null, false, 2, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Button" parent="TabContainer/Server log"]
+self_modulate = Color( 0.764706, 0.764706, 0.764706, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 39.0
+margin_right = -8.0
+margin_bottom = -7.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Log" type="RichTextLabel" parent="TabContainer/Server log/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 6.0
+margin_right = -5.0
+margin_bottom = -6.0
+focus_mode = 2
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+bbcode_enabled = true
+bbcode_text = "testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest"
+text = "testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest
+testtesttesttesttesttest"
+selection_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnClearLog" type="Button" parent="TabContainer/Server log"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -92.437
+margin_top = 4.0
+margin_right = -8.43701
+margin_bottom = 29.0
+text = "Clear"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Label" type="Label" parent="TabContainer/Settings"]
+margin_left = 38.0
+margin_top = 6.0
+margin_right = 213.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 2 )
+text = "SSL Settings"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CertMethod" type="VBoxContainer" parent="TabContainer/Settings"]
+margin_left = 11.0
+margin_top = 30.0
+margin_right = 591.0
+margin_bottom = 138.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Radio0" type="CheckBox" parent="TabContainer/Settings/CertMethod"]
+margin_right = 580.0
+margin_bottom = 24.0
+group = SubResource( 3 )
+text = "Use manually provided separate .crt and .key files"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Radio1" type="CheckBox" parent="TabContainer/Settings/CertMethod"]
+margin_top = 28.0
+margin_right = 580.0
+margin_bottom = 52.0
+group = SubResource( 3 )
+text = "Use manually provided single .crt file containing both key and certificate data"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Radio2" type="CheckBox" parent="TabContainer/Settings/CertMethod"]
+margin_top = 56.0
+margin_right = 580.0
+margin_bottom = 80.0
+group = SubResource( 3 )
+text = "Use manually provided PKCS #12 archive (requires OpenSSL)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Radio3" type="CheckBox" parent="TabContainer/Settings/CertMethod"]
+margin_top = 84.0
+margin_right = 580.0
+margin_bottom = 108.0
+group = SubResource( 3 )
+text = "Automatically select the most recent PKCS #12 archive from folder (requires OpenSSL)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FilePaths" type="VBoxContainer" parent="TabContainer/Settings"]
+anchor_left = 0.00119173
+anchor_right = 0.00119173
+margin_left = 12.0562
+margin_top = 147.0
+margin_right = 727.056
+margin_bottom = 476.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="cert_crt_file" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
+margin_right = 714.0
+margin_bottom = 24.0
+hint_tooltip = "Path to a manual *.crt file containing a X.509
+certificate chain data for the app to use with
+SSL connections."
+placeholder_text = "Certificate (*.crt) file location"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_crt" type="Button" parent="TabContainer/Settings/FilePaths/cert_crt_file"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 43.0
+margin_bottom = 11.0
+text = "..."
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="cert_key_file" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
+margin_top = 28.0
+margin_right = 714.0
+margin_bottom = 52.0
+hint_tooltip = "Path to a manual *.key file containing a private
+key for the app to use with SSL connections."
+placeholder_text = "Private key (*.key) file location"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_key" type="Button" parent="TabContainer/Settings/FilePaths/cert_key_file"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 43.0
+margin_bottom = 11.0
+text = "..."
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="cert_pfx_file" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
+margin_top = 56.0
+margin_right = 714.0
+margin_bottom = 80.0
+hint_tooltip = "Path to single *.pfx certificate archive for the
+app to extract and load."
+placeholder_text = "PKCS (*.pfx) file location"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_pfx" type="Button" parent="TabContainer/Settings/FilePaths/cert_pfx_file"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 43.0
+margin_bottom = 11.0
+text = "..."
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="cert_pfx_dir" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
+margin_top = 84.0
+margin_right = 714.0
+margin_bottom = 108.0
+hint_tooltip = "Path to PKCS storage folder where the app will
+automatically load the most recent one (e.g.
+C:/ProgramData/Certify/assets/<app_name>
+for .pfx files stored by CertifyTheWeb)"
+placeholder_text = "PKCS storage location"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_PFX_folder" type="Button" parent="TabContainer/Settings/FilePaths/cert_pfx_dir"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 43.0
+margin_bottom = 11.0
+text = "..."
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="openssl_bin" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
+margin_top = 112.0
+margin_right = 714.0
+margin_bottom = 136.0
+hint_tooltip = "Path to the OpenSSL binary file for running the
+extraction commands (e.g. C:/Program
+Files/Git/usr/bin/openssl.exe)"
+text = "C:/Program Files/Git/usr/bin/openssl.exe"
+placeholder_text = "OpenSSL binary file"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_openssl" type="Button" parent="TabContainer/Settings/FilePaths/openssl_bin"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 43.0
+margin_bottom = 11.0
+text = "..."
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="About" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Label" type="Label" parent="TabContainer/About"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -134.0
+margin_top = 4.0
+margin_right = 82.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 2 )
+text = "Godot RPC Server Manager"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="TabContainer/About"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 90.0
+margin_top = 8.0
+margin_right = 260.0
+margin_bottom = 33.0
+text = "v0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="TabContainer/About"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_top = 53.0
+margin_right = -11.0
+margin_bottom = -13.0
+text = "Warnings:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="server_nodes" type="VBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+margin_left = 4.0
+margin_top = 30.0
+margin_right = -5.0
+margin_bottom = 217.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="RPC_Server" parent="server_nodes" instance=ExtResource( 2 )]
+margin_right = 791.0
+
+[node name="RPC_Server2" parent="server_nodes" instance=ExtResource( 2 )]
+margin_top = 34.0
+margin_right = 791.0
+margin_bottom = 64.0
+
+[node name="RPC_Server3" parent="server_nodes" instance=ExtResource( 2 )]
+margin_top = 68.0
+margin_right = 791.0
+margin_bottom = 98.0
+
+[node name="new_server" type="Button" parent="."]
+visible = false
+margin_left = 14.0
+margin_top = 361.0
+margin_right = 137.0
+margin_bottom = 389.0
+text = "New server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeleteConfirmationDialog" type="ConfirmationDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -37.5
+margin_right = 100.0
+margin_bottom = 37.5
+window_title = "Confirm deletion"
+dialog_text = "Are you sure you want to delete the selected server?"
+dialog_autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PathChooseDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -266.0
+margin_top = -189.0
+margin_right = 267.0
+margin_bottom = 189.0
+window_title = "Open a Directory"
+mode = 2
+access = 2
+current_dir = "/Godot/Projects/RPC_Server"
+current_path = "/Godot/Projects/RPC_Server/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileChooseDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -266.0
+margin_top = -189.0
+margin_right = 267.0
+margin_bottom = 189.0
+window_title = "Open a File"
+mode = 0
+access = 2
+current_dir = "/Godot/Projects/RPC_Server"
+current_path = "/Godot/Projects/RPC_Server/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="tab_changed" from="TabContainer" to="." method="_on_TabContainer_tab_changed"]
+[connection signal="item_selected" from="TabContainer/Server log/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="TabContainer/Server log/BtnClearLog" to="." method="_on_BtnClearLog_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/CertMethod/Radio0" to="." method="_on_CertMethodRadio_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="TabContainer/Settings/CertMethod/Radio1" to="." method="_on_CertMethodRadio_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="TabContainer/Settings/CertMethod/Radio2" to="." method="_on_CertMethodRadio_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="TabContainer/Settings/CertMethod/Radio3" to="." method="_on_CertMethodRadio_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="TabContainer/Settings/FilePaths/cert_crt_file/Btn_crt" to="." method="_on_Btn_crt_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/FilePaths/cert_key_file/Btn_key" to="." method="_on_Btn_key_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/FilePaths/cert_pfx_file/Btn_pfx" to="." method="_on_Btn_pfx_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/FilePaths/cert_pfx_dir/Btn_PFX_folder" to="." method="_on_Btn_PFX_folder_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/FilePaths/openssl_bin/Btn_openssl" to="." method="_on_Btn_openssl_pressed"]
+[connection signal="pressed" from="new_server" to="." method="_on_new_server_pressed"]
+[connection signal="confirmed" from="DeleteConfirmationDialog" to="." method="really_delete_server"]
+[connection signal="dir_selected" from="PathChooseDialog" to="." method="_on_PathChooseDialog_dir_selected"]
+[connection signal="file_selected" from="FileChooseDialog" to="." method="_on_FileChooseDialog_file_selected"]

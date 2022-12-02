@@ -1,0 +1,371 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://RPC_Server.gd" type="Script" id=1]
+[ext_resource path="res://RPC.gd" type="Script" id=2]
+
+[node name="RPC_Server" type="Button"]
+self_modulate = Color( 0.482353, 0.490196, 0.545098, 0.807843 )
+margin_right = 800.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 500, 30 )
+size_flags_horizontal = 3
+disabled = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="app_name" type="LineEdit" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -565.0
+margin_bottom = -3.0
+placeholder_text = "[app name]"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TABS" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -560.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TAB0" type="Control" parent="TABS"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="port" type="SpinBox" parent="TABS/TAB0"]
+anchor_left = 1.0004
+anchor_top = 0.5
+anchor_right = 1.0004
+anchor_bottom = 0.5
+margin_left = -560.99
+margin_top = -12.0
+margin_right = -483.99
+margin_bottom = 12.0
+max_value = 99999.0
+value = 99999.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PANEL" type="Button" parent="TABS/TAB0"]
+anchor_left = 1.0004
+anchor_top = 0.5
+anchor_right = 1.0004
+anchor_bottom = 0.5
+margin_left = -424.004
+margin_top = -12.0
+margin_right = -281.004
+margin_bottom = 12.0
+focus_mode = 0
+disabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="uptime" type="Label" parent="TABS/TAB0/PANEL"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -6.0
+margin_right = 66.0
+margin_bottom = 10.0
+text = "724 days 00:00:00"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PANEL2" type="Button" parent="TABS/TAB0"]
+anchor_left = 1.0004
+anchor_top = 0.5
+anchor_right = 1.0004
+anchor_bottom = 0.5
+margin_left = -278.16
+margin_top = -12.0
+margin_right = -188.16
+margin_bottom = 12.0
+focus_mode = 0
+disabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="players" type="Label" parent="TABS/TAB0/PANEL2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -49.5
+margin_top = -6.0
+margin_right = 49.5
+margin_bottom = 10.0
+text = "1000/1000"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="btn_start_stop" type="Button" parent="TABS/TAB0"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -482.333
+margin_top = -11.0
+margin_right = -427.333
+margin_bottom = 11.0
+text = "start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btn_delete" type="Button" parent="TABS/TAB0"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -11.0
+margin_right = -6.0
+margin_bottom = 11.0
+text = "x"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MAX_PEERS" type="SpinBox" parent="TABS/TAB0"]
+anchor_left = 1.0004
+anchor_top = 0.5
+anchor_right = 1.0004
+anchor_bottom = 0.5
+margin_left = -103.163
+margin_top = -12.0
+margin_right = -29.1632
+margin_bottom = 12.0
+min_value = 1.0
+max_value = 1000.0
+value = 1000.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TABS/TAB0/MAX_PEERS"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -180.724
+margin_top = -12.0
+margin_right = -3.7243
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 0, 12 )
+text = "Max peers:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TAB1" type="Control" parent="TABS"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="USE_WEBSOCKET" type="CheckBox" parent="TABS/TAB1"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -560.736
+margin_top = -12.0
+margin_right = -428.736
+margin_bottom = 12.0
+text = "Use websockets"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TABS/TAB1/USE_WEBSOCKET"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -176.562
+margin_top = -12.0
+margin_right = 0.437927
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 0, 12 )
+text = "Use websockets:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="USE_SSL" type="CheckBox" parent="TABS/TAB1"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -416.663
+margin_top = -12.0
+margin_right = -338.663
+margin_bottom = 12.0
+text = "Use SSL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TABS/TAB1/USE_SSL"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -176.562
+margin_top = -12.0
+margin_right = 0.437927
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 0, 12 )
+text = "Use SSL:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CONNECTION_TIMEOUT" type="SpinBox" parent="TABS/TAB1"]
+visible = false
+anchor_left = 1.0004
+anchor_top = 0.5
+anchor_right = 1.0004
+anchor_bottom = 0.5
+margin_left = -77.1587
+margin_top = -12.0
+margin_right = -3.15869
+margin_bottom = 12.0
+max_value = 60.0
+value = 60.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TABS/TAB1/CONNECTION_TIMEOUT"]
+visible = false
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = -229.0
+margin_top = -12.0
+margin_right = -4.0
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 0, 12 )
+text = "Connections timeout (seconds):"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TAB2" type="Control" parent="TABS"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="selector" type="CheckBox" parent="TABS/TAB2"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -591.908
+margin_top = -12.0
+margin_right = -567.908
+margin_bottom = 12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TAB3" type="Control" parent="TABS"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="cache_path" type="LineEdit" parent="TABS/TAB3"]
+visible = false
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -405.0
+margin_top = -12.0
+margin_right = -3.0
+margin_bottom = 12.0
+placeholder_text = "path/to/player/nodes"
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TAB4" type="Control" parent="TABS"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TAB5" type="Control" parent="TABS"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="RPC_ROOT" type="Node" parent="."]
+
+[node name="RPC" type="Node" parent="RPC_ROOT"]
+script = ExtResource( 2 )
+
+[connection signal="text_changed" from="app_name" to="." method="_on_app_name_text_changed"]
+[connection signal="value_changed" from="TABS/TAB0/port" to="." method="_on_port_value_changed"]
+[connection signal="pressed" from="TABS/TAB0/btn_start_stop" to="." method="_on_btn_start_stop_pressed"]
+[connection signal="pressed" from="TABS/TAB0/btn_delete" to="." method="_on_btn_delete_pressed"]
+[connection signal="value_changed" from="TABS/TAB0/MAX_PEERS" to="." method="_on_MAX_PEERS_value_changed"]
+[connection signal="toggled" from="TABS/TAB1/USE_WEBSOCKET" to="." method="_on_USE_WEBSOCKET_toggled"]
+[connection signal="toggled" from="TABS/TAB1/USE_SSL" to="." method="_on_USE_SSL_toggled"]
+[connection signal="value_changed" from="TABS/TAB1/CONNECTION_TIMEOUT" to="." method="_on_CONNECTION_TIMEOUT_value_changed"]
+[connection signal="pressed" from="TABS/TAB2/selector" to="." method="_on_selector_pressed"]
+[connection signal="focus_exited" from="TABS/TAB3/cache_path" to="." method="_on_cache_path_focus_exited"]
+[connection signal="text_changed" from="TABS/TAB3/cache_path" to="." method="_on_cache_path_text_changed"]
+[connection signal="text_entered" from="TABS/TAB3/cache_path" to="." method="_on_cache_path_text_entered"]
