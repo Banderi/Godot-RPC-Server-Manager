@@ -39,7 +39,6 @@ __meta__ = {
 }
 
 [node name="TAB0" type="Control" parent="TABS"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -57,6 +56,7 @@ margin_left = -560.99
 margin_top = -12.0
 margin_right = -483.99
 margin_bottom = 12.0
+hint_tooltip = "Server port"
 max_value = 99999.0
 value = 99999.0
 __meta__ = {
@@ -185,6 +185,7 @@ __meta__ = {
 }
 
 [node name="TAB1" type="Control" parent="TABS"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2

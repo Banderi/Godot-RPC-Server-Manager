@@ -20,17 +20,19 @@ _global_script_class_icons={
 
 [application]
 
-config/name="RPC_Server"
+config/name="RPC Server Manager"
 run/main_scene="res://MAIN.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Log="*res://Log.gd"
+GlobalScope="*res://GlobalScope.gd"
 
 [display]
 
 window/size/width=800
+window/size/height=480
 
 [input]
 

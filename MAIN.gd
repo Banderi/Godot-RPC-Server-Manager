@@ -94,16 +94,21 @@ func find_most_recent_file(path):
 
 # settings IO
 var DATA_PATH = "user://data.json"
-func save_user_data():
-	write_file(DATA_PATH, to_json(settings))
+func save_user_data(export_file_path = ""):
+	write_file(export_file_path if export_file_path != "" else DATA_PATH, to_json(settings))
 func set_setting(variable, value):
 	settings[variable] = value
 	save_user_data()
-
-func load_user_data():
-	settings = parse_json(read_file(DATA_PATH))
-	for s_params in settings.servers:
-		add_server_node(s_params)
+func load_user_data(import_file_path = ""):
+	var fdata = read_file(import_file_path if import_file_path != "" else DATA_PATH)
+	if fdata != null:
+		settings = parse_json(fdata)
+		clear_server_nodes()
+		for s_params in settings.servers:
+			add_server_node(s_params)
+	elif import_file_path == "":
+		Log.generic(null,str("No user data file found, creating a new one..."))
+		save_user_data()
 
 # cert IO
 var SSL_CERT = null
@@ -258,6 +263,10 @@ func add_server_node(params):
 	server_select_dropdown.add_item(str("[ ",node.APP_NAME," ]"))
 	SERVERS.push_back(node)
 	return node
+func clear_server_nodes():
+	for s in $server_nodes.get_children():
+		s.free()
+	SERVERS = []
 func remove_server_node(node):
 	var i = node.get_index()
 	server_select_dropdown.remove_item(i + 3)
@@ -275,18 +284,13 @@ func create_new_server():
 	save_user_data()
 var deleting_node = null
 func delete_server(node):
-	if deleting_node != null:
+	if deleting_node != null: # to fix some UI infinite loops
 		return
 	deleting_node = node
-	$DeleteConfirmationDialog.popup()
-func really_delete_server():
-	if deleting_node == null:
-		return
-	var i = deleting_node.get_index()
-	settings.servers.remove(i)
-	remove_server_node(deleting_node)
-	save_user_data()
-	deleting_node = null
+	dialog_operation_mode = 0
+	$ConfirmationDialog.window_title = "Confirm deletion"
+	$ConfirmationDialog.dialog_text = "Are you sure you want to delete the selected server?"
+	$ConfirmationDialog.popup()
 
 func status_literal(status):
 	match status:
@@ -308,11 +312,10 @@ func any_server_need_SSL_upkeep():
 	return false
 
 func _ready():
-	for s in $server_nodes.get_children():
-		s.free()
+	clear_server_nodes() # clear the ones in the editor used for testing
 	load_user_data()
 	update_settings_ui()
-	$server_nodes.show()
+	_on_TabContainer_tab_changed(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 var t = 0
@@ -344,7 +347,7 @@ func _process(delta):
 		if t >= settings.get("cert_refresh_interval", 3600):
 			refresh_cert_data(true)
 			t = 0
-	if !$DeleteConfirmationDialog.visible:
+	if !$ConfirmationDialog.visible:
 		deleting_node = null
 	$new_server.rect_position.y = $server_nodes.rect_position.y + 34 * $server_nodes.get_child_count()
 	$new_server.visible = CURRENT_TAB == 0 || CURRENT_TAB == 1
@@ -403,44 +406,77 @@ func _on_TabContainer_tab_changed(tab):
 		$server_nodes.show()
 	refresh_log(true)
 
-# folders
-var file_selection_mode = -1
+# SSL file settings
 func _on_Btn_PFX_folder_pressed():
-	file_selection_mode = 0
+	dialog_operation_mode = 0
 	$PathChooseDialog.popup()
-func _on_Btn_temp_dir_pressed():
-	file_selection_mode = 1
-	$PathChooseDialog.popup()
-
-# files
 func _on_Btn_crt_pressed():
-	file_selection_mode = 0
+	dialog_operation_mode = 0
 	$FileChooseDialog.filters = ["*.crt ; Certificate files"]
 	$FileChooseDialog.popup()
 func _on_Btn_key_pressed():
-	file_selection_mode = 1
+	dialog_operation_mode = 1
 	$FileChooseDialog.filters = ["*.key ; Private key files"]
 	$FileChooseDialog.popup()
 func _on_Btn_pfx_pressed():
-	file_selection_mode = 2
+	dialog_operation_mode = 2
 	$FileChooseDialog.filters = ["*.pfx ; PKCS #12 archives"]
 	$FileChooseDialog.popup()
 func _on_Btn_openssl_pressed():
-	file_selection_mode = 3
+	dialog_operation_mode = 3
 	$FileChooseDialog.filters = ["*.exe ; OpenSSL binary executable"]
 	$FileChooseDialog.popup()
 
+# SSL method selection
+func _on_CertMethodRadio_pressed(button_id):
+	set_setting("cert_method", button_id)
+	update_settings_ui()
+
+# data backup / clear
+func _on_Btn_prefs_import_pressed():
+	dialog_operation_mode = 4
+	$FileChooseDialog.filters = ["*.json ; JSON User data settings"]
+	$FileChooseDialog.popup()
+func _on_Btn_prefs_export_pressed():
+	$FileSaveDialog.filters = ["*.json ; JSON User data settings"]
+	$FileSaveDialog.current_file = "data.json"
+	$FileSaveDialog.popup()
+func _on_Btn_prefs_clear_pressed():
+	dialog_operation_mode = 1
+	$ConfirmationDialog.window_title = "Confirm deletion"
+	$ConfirmationDialog.dialog_text = "Are you sure you want to permanently clear all settings?"
+	$ConfirmationDialog.popup()
+
 # dialog windows
+var dialog_operation_mode = -1
+func _on_ConfirmationDialog_confirmed():
+	match dialog_operation_mode:
+		0: # delete server
+			if deleting_node == null:
+				return
+			var i = deleting_node.get_index()
+			settings.servers.remove(i)
+			remove_server_node(deleting_node)
+			save_user_data()
+			deleting_node = null
+		1: # clear all user data
+			settings = {
+				"servers": [],
+			}
+			save_user_data()
+			load_user_data()
+	dialog_operation_mode = -1
+	update_settings_ui()
 func _on_PathChooseDialog_dir_selected(dir):
-	match file_selection_mode:
+	match dialog_operation_mode:
 		0: # PFX storage dir
 			set_setting("cert_pfx_dir", dir)
 		1: # temp file extraction dir
 			set_setting("cert_temp_dir", dir)
-	file_selection_mode = -1
+	dialog_operation_mode = -1
 	update_settings_ui()
 func _on_FileChooseDialog_file_selected(path):
-	match file_selection_mode:
+	match dialog_operation_mode:
 		0: # CRT file
 			set_setting("cert_crt_file", path)
 		1: # KEY file
@@ -449,13 +485,13 @@ func _on_FileChooseDialog_file_selected(path):
 			set_setting("cert_pfx_file", path)
 		3: # OpenSSL binaries
 			set_setting("openssl_bin", path)
-	file_selection_mode = -1
+		4: # user data JSON import
+			load_user_data(path)
+			save_user_data()
+	dialog_operation_mode = -1
 	update_settings_ui()
-
-# SSL method selection
-func _on_CertMethodRadio_pressed(button_id):
-	set_setting("cert_method", button_id)
-	update_settings_ui()
+func _on_FileSaveDialog_file_selected(path):
+	save_user_data(path)
 
 # server logs
 func _on_BtnClearLog_pressed():
@@ -469,3 +505,5 @@ func _on_BtnClearLog_pressed():
 	refresh_log(true)
 func _on_OptionButton_item_selected(index):
 	refresh_log(true)
+
+

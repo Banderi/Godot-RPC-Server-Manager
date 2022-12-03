@@ -4,6 +4,8 @@ var LOG_EVERYTHING = []
 var LOG_ENGINE = []
 var LOG_ERRORS = []
 
+func get_enum_string(enums, value):
+	return enums.keys()[value]
 func get_timestamp(from):
 	var d = OS.get_datetime()
 	var date = "%04d/%02d/%02d %02d:%02d:%02d" % [d.year, d.month, d.day, d.hour, d.minute, d.second]
@@ -24,7 +26,7 @@ func generic(from, text):
 func error(from, err, text):
 	var msg = str(get_timestamp(from), "ERROR: ", text)
 	if err != null:
-		msg += str(" (error ", err, ")")
+		msg += str(" (", err, ":", get_enum_string(GlobalScope.Error, err), ")")
 
 	var bb_msg = str("[color=#ee1100]", msg, "[/color]")
 	LOG_EVERYTHING.push_back(bb_msg)

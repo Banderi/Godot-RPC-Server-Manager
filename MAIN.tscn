@@ -41,7 +41,7 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="Server parameters" type="Tabs" parent="TabContainer"]
+[node name="Server options" type="Tabs" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -147,21 +147,21 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="Label" type="Label" parent="TabContainer/Settings"]
-margin_left = 38.0
+margin_left = 78.0
 margin_top = 6.0
-margin_right = 213.0
+margin_right = 253.0
 margin_bottom = 33.0
 custom_fonts/font = SubResource( 2 )
 text = "SSL Settings"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CertMethod" type="VBoxContainer" parent="TabContainer/Settings"]
+anchor_right = 1.0
 margin_left = 11.0
 margin_top = 30.0
-margin_right = 591.0
+margin_right = -201.0
 margin_bottom = 138.0
 __meta__ = {
 "_edit_group_": true,
@@ -208,11 +208,10 @@ __meta__ = {
 }
 
 [node name="FilePaths" type="VBoxContainer" parent="TabContainer/Settings"]
-anchor_left = 0.00119173
-anchor_right = 0.00119173
-margin_left = 12.0562
+anchor_right = 1.0
+margin_left = 12.0
 margin_top = 147.0
-margin_right = 727.056
+margin_right = -62.0
 margin_bottom = 476.0
 __meta__ = {
 "_edit_group_": true,
@@ -220,7 +219,7 @@ __meta__ = {
 }
 
 [node name="cert_crt_file" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
-margin_right = 714.0
+margin_right = 718.0
 margin_bottom = 24.0
 hint_tooltip = "Path to a manual *.crt file containing a X.509
 certificate chain data for the app to use with
@@ -246,8 +245,9 @@ __meta__ = {
 }
 
 [node name="cert_key_file" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
+visible = false
 margin_top = 28.0
-margin_right = 714.0
+margin_right = 718.0
 margin_bottom = 52.0
 hint_tooltip = "Path to a manual *.key file containing a private
 key for the app to use with SSL connections."
@@ -272,9 +272,10 @@ __meta__ = {
 }
 
 [node name="cert_pfx_file" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
-margin_top = 56.0
-margin_right = 714.0
-margin_bottom = 80.0
+visible = false
+margin_top = 28.0
+margin_right = 718.0
+margin_bottom = 52.0
 hint_tooltip = "Path to single *.pfx certificate archive for the
 app to extract and load."
 placeholder_text = "PKCS (*.pfx) file location"
@@ -298,9 +299,10 @@ __meta__ = {
 }
 
 [node name="cert_pfx_dir" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
-margin_top = 84.0
-margin_right = 714.0
-margin_bottom = 108.0
+visible = false
+margin_top = 28.0
+margin_right = 718.0
+margin_bottom = 52.0
 hint_tooltip = "Path to PKCS storage folder where the app will
 automatically load the most recent one (e.g.
 C:/ProgramData/Certify/assets/<app_name>
@@ -326,9 +328,9 @@ __meta__ = {
 }
 
 [node name="openssl_bin" type="LineEdit" parent="TabContainer/Settings/FilePaths"]
-margin_top = 112.0
-margin_right = 714.0
-margin_bottom = 136.0
+margin_top = 28.0
+margin_right = 718.0
+margin_bottom = 52.0
 hint_tooltip = "Path to the OpenSSL binary file for running the
 extraction commands (e.g. C:/Program
 Files/Git/usr/bin/openssl.exe)"
@@ -350,6 +352,54 @@ margin_bottom = 11.0
 text = "..."
 __meta__ = {
 "_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="TabContainer/Settings"]
+margin_left = 78.0
+margin_top = 232.162
+margin_right = 253.0
+margin_bottom = 259.162
+custom_fonts/font = SubResource( 2 )
+text = "Backup settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackupOps" type="HBoxContainer" parent="TabContainer/Settings"]
+margin_left = 13.0
+margin_top = 264.0
+margin_right = 356.0
+margin_bottom = 294.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_prefs_import" type="Button" parent="TabContainer/Settings/BackupOps"]
+margin_right = 125.0
+margin_bottom = 30.0
+text = "Import from JSON"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_prefs_export" type="Button" parent="TabContainer/Settings/BackupOps"]
+margin_left = 130.0
+margin_right = 235.0
+margin_bottom = 30.0
+text = "Export as JSON"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Btn_prefs_clear" type="Button" parent="TabContainer/Settings/BackupOps"]
+margin_left = 240.0
+margin_right = 334.0
+margin_bottom = 30.0
+text = "Clear all data"
+__meta__ = {
 "_edit_use_anchors_": false
 }
 
@@ -382,12 +432,13 @@ margin_left = 90.0
 margin_top = 8.0
 margin_right = 260.0
 margin_bottom = 33.0
-text = "v0.1"
+text = "v0.3"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label3" type="Label" parent="TabContainer/About"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 11.0
@@ -427,24 +478,26 @@ margin_bottom = 98.0
 
 [node name="new_server" type="Button" parent="."]
 visible = false
-margin_left = 14.0
-margin_top = 361.0
-margin_right = 137.0
-margin_bottom = 389.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -105.0
+margin_top = 134.099
+margin_right = 105.0
+margin_bottom = 157.099
 text = "New server"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -37.5
-margin_right = 100.0
-margin_bottom = 37.5
+margin_left = -131.0
+margin_top = -37.0
+margin_right = 131.0
+margin_bottom = 38.0
 window_title = "Confirm deletion"
 dialog_text = "Are you sure you want to delete the selected server?"
 dialog_autowrap = true
@@ -488,6 +541,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FileSaveDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -266.0
+margin_top = -189.0
+margin_right = 267.0
+margin_bottom = 189.0
+access = 2
+current_dir = "/Godot/Projects/RPC_Server"
+current_path = "/Godot/Projects/RPC_Server/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_TabContainer_tab_changed"]
 [connection signal="item_selected" from="TabContainer/Server log/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="pressed" from="TabContainer/Server log/BtnClearLog" to="." method="_on_BtnClearLog_pressed"]
@@ -500,7 +569,11 @@ __meta__ = {
 [connection signal="pressed" from="TabContainer/Settings/FilePaths/cert_pfx_file/Btn_pfx" to="." method="_on_Btn_pfx_pressed"]
 [connection signal="pressed" from="TabContainer/Settings/FilePaths/cert_pfx_dir/Btn_PFX_folder" to="." method="_on_Btn_PFX_folder_pressed"]
 [connection signal="pressed" from="TabContainer/Settings/FilePaths/openssl_bin/Btn_openssl" to="." method="_on_Btn_openssl_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/BackupOps/Btn_prefs_import" to="." method="_on_Btn_prefs_import_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/BackupOps/Btn_prefs_export" to="." method="_on_Btn_prefs_export_pressed"]
+[connection signal="pressed" from="TabContainer/Settings/BackupOps/Btn_prefs_clear" to="." method="_on_Btn_prefs_clear_pressed"]
 [connection signal="pressed" from="new_server" to="." method="_on_new_server_pressed"]
-[connection signal="confirmed" from="DeleteConfirmationDialog" to="." method="really_delete_server"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
 [connection signal="dir_selected" from="PathChooseDialog" to="." method="_on_PathChooseDialog_dir_selected"]
 [connection signal="file_selected" from="FileChooseDialog" to="." method="_on_FileChooseDialog_file_selected"]
+[connection signal="file_selected" from="FileSaveDialog" to="." method="_on_FileSaveDialog_file_selected"]
